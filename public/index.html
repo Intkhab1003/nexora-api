@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXORA API | Developer Console &amp; Endpoint Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Ambient Background Orbs & Floating Particles -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="orb orb-cyan" aria-hidden="true"></div>
+  <div class="orb orb-purple" aria-hidden="true"></div>
+  <div id="particles-container" class="particles" aria-hidden="true"></div>
+
+  <!-- Navigation Header -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="#hero" class="brand">
+        <span class="brand-cube"></span>
+        <span>NEXORA <span class="gradient-text">API</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#endpoints">Endpoints</a>
+        <a href="#docs">Documentation</a>
+        <a href="#project-info">Architecture</a>
+        <a href="/" target="_blank" rel="noopener" class="nav-pill">Raw JSON ↗</a>
+      </nav>
+      <div class="server-pill" id="server-health">
+        <span class="pulse-dot"></span>
+        <span>Node.js :3000</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section with 3D Floating Server Visual -->
+    <section id="hero" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="badge-tag">WEBORA TEC INTERNSHIP • WEEK 4 TASK 1</div>
+          <h1>Next-Gen <span class="gradient-text">REST API</span> &amp; Live Endpoint Console</h1>
+          <p class="hero-subtitle">
+            Powered by <strong>Node.js</strong> and <strong>Express.js</strong>. Trigger real HTTP <code>GET</code> requests directly against the local Express backend, inspect live status codes, and verify JSON payloads in real time.
+          </p>
+          <div class="hero-actions">
+            <a href="#endpoints" class="btn btn-primary">Launch API Tester</a>
+            <button type="button" id="test-all-btn" class="btn btn-secondary">Ping All Endpoints</button>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <span class="metric-val">REST</span>
+              <span class="metric-label">JSON Protocol</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val" id="global-latency">-- ms</span>
+              <span class="metric-label">Last Latency</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">Express 4</span>
+              <span class="metric-label">Runtime Engine</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CSS 3D Floating Server Rack Illustration -->
+        <div class="hero-visual" aria-hidden="true">
+          <div class="server-stage">
+            <div class="holo-ring ring-outer"></div>
+            <div class="holo-ring ring-inner"></div>
+            <div class="server-stack">
+              <div class="server-blade blade-1">
+                <div class="blade-leds">
+                  <span class="led led-cyan"></span>
+                  <span class="led led-purple"></span>
+                  <span class="led led-green"></span>
+                </div>
+                <span class="blade-tag">NODE_CORE // V8</span>
+                <div class="blade-bars"><span></span><span></span></div>
+              </div>
+              <div class="server-blade blade-2">
+                <div class="blade-leds">
+                  <span class="led led-cyan"></span>
+                  <span class="led led-green"></span>
+                </div>
+                <span class="blade-tag">EXPRESS_ROUTER // :3000</span>
+                <div class="blade-bars"><span></span><span></span></div>
+              </div>
+              <div class="server-blade blade-3">
+                <div class="blade-leds">
+                  <span class="led led-purple"></span>
+                  <span class="led led-cyan"></span>
+                </div>
+                <span class="blade-tag">JSON_STREAM // 200 OK</span>
+                <div class="blade-bars"><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Interactive API Endpoint Cards -->
+    <section id="endpoints" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">LIVE FETCH() SANDBOX</span>
+          <h2>Interactive API Endpoints</h2>
+          <p>Every button below executes an authentic asynchronous <code>fetch()</code> call to your running Express server.</p>
+        </div>
+
+        <div class="endpoints-grid">
+          <!-- Card 1: GET / -->
+          <article class="glass-card endpoint-card" data-endpoint="/">
+            <div class="card-top">
+              <div class="route-badge">
+                <span class="method-get">GET</span>
+                <code class="route-path">/</code>
+              </div>
+              <span class="status-pill status-idle" id="status-root">READY</span>
+            </div>
+
+            <h3>API Welcome Route</h3>
+            <p class="card-desc">
+              Primary root health and greeting route returning server metadata, version info, and active route directory in JSON.
+            </p>
+
+            <div class="card-controls">
+              <button type="button" class="btn btn-primary test-btn" data-url="/" data-target="root">
+                <span class="btn-text">Test API</span>
+              </button>
+              <a href="/" target="_blank" rel="noopener" class="btn btn-ghost">Open in Browser ↗</a>
+            </div>
+
+            <div class="console-box">
+              <div class="console-header">
+                <div class="console-meta">
+                  <span class="console-title">JSON Response</span>
+                  <span class="latency-badge" id="time-root"></span>
+                </div>
+                <button type="button" class="copy-btn" data-copy-target="output-root" disabled>Copy JSON</button>
+              </div>
+              <pre class="json-output" id="output-root">// Click "Test API" to send a live GET / request...</pre>
+            </div>
+          </article>
+
+          <!-- Card 2: GET /about -->
+          <article class="glass-card endpoint-card" data-endpoint="/about">
+            <div class="card-top">
+              <div class="route-badge">
+                <span class="method-get">GET</span>
+                <code class="route-path">/about</code>
+              </div>
+              <span class="status-pill status-idle" id="status-about">READY</span>
+            </div>
+
+            <h3>Project Overview Route</h3>
+            <p class="card-desc">
+              Returns a structured JSON specification detailing the NEXORA API mission, full-stack architecture, and developer credits.
+            </p>
+
+            <div class="card-controls">
+              <button type="button" class="btn btn-primary test-btn" data-url="/about" data-target="about">
+                <span class="btn-text">Test API</span>
+              </button>
+              <a href="/about" target="_blank" rel="noopener" class="btn btn-ghost">Open in Browser ↗</a>
+            </div>
+
+            <div class="console-box">
+              <div class="console-header">
+                <div class="console-meta">
+                  <span class="console-title">JSON Response</span>
+                  <span class="latency-badge" id="time-about"></span>
+                </div>
+                <button type="button" class="copy-btn" data-copy-target="output-about" disabled>Copy JSON</button>
+              </div>
+              <pre class="json-output" id="output-about">// Click "Test API" to send a live GET /about request...</pre>
+            </div>
+          </article>
+        </div>
+
+        <!-- 404 Error Handling Verification Bar -->
+        <div class="glass-card error-demo-bar">
+          <div class="error-demo-info">
+            <span class="method-warn">404 TEST</span>
+            <div>
+              <strong>Verify Error Middleware:</strong> Test how Express handles an undefined route (<code>GET /non-existent-route</code>).
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary test-btn" data-url="/non-existent-route" data-target="error">
+            <span class="btn-text">Trigger 404 JSON</span>
+          </button>
+        </div>
+
+        <div class="console-box error-console hidden" id="error-console-wrapper">
+          <div class="console-header">
+            <div class="console-meta">
+              <span class="console-title">404 Middleware Response</span>
+              <span class="status-pill status-err" id="status-error">404 NOT FOUND</span>
+              <span class="latency-badge" id="time-error"></span>
+            </div>
+            <button type="button" class="copy-btn" data-copy-target="output-error">Copy JSON</button>
+          </div>
+          <pre class="json-output" id="output-error"></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Documentation Section -->
+    <section id="docs" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">API SPECIFICATION</span>
+          <h2>Endpoint Reference &amp; Usage</h2>
+          <p>Compatible with web browsers, cURL, Postman, Thunder Client, and browser Fetch API.</p>
+        </div>
+
+        <div class="glass-card table-wrapper">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Status</th>
+                <th>Content-Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="method-get">GET</span></td>
+                <td><code>/</code></td>
+                <td><span class="code-ok">200 OK</span></td>
+                <td><code>application/json</code></td>
+                <td>Returns welcome greeting, API version, route map, and ISO timestamp.</td>
+              </tr>
+              <tr>
+                <td><span class="method-get">GET</span></td>
+                <td><code>/about</code></td>
+                <td><span class="code-ok">200 OK</span></td>
+                <td><code>application/json</code></td>
+                <td>Returns NEXORA API project overview, tech stack array, and internship metadata.</td>
+              </tr>
+              <tr>
+                <td><span class="method-get">GET</span></td>
+                <td><code>/dashboard</code></td>
+                <td><span class="code-ok">200 OK</span></td>
+                <td><code>text/html</code></td>
+                <td>Serves this interactive glassmorphic developer dashboard UI.</td>
+              </tr>
+              <tr>
+                <td><span class="method-warn">ANY</span></td>
+                <td><code>/*</code></td>
+                <td><span class="code-err">404 Not Found</span></td>
+                <td><code>application/json</code></td>
+                <td>Catches unregistered routes and returns a clean JSON error object.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Architecture & Info -->
+    <section id="project-info" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">SYSTEM ARCHITECTURE</span>
+          <h2>How NEXORA API Works</h2>
+        </div>
+
+        <div class="info-grid">
+          <div class="glass-card info-card">
+            <div class="info-icon">01</div>
+            <h3>Client Request</h3>
+            <p>A browser, Postman client, or frontend <code>fetch()</code> call dispatches an HTTP <code>GET</code> request to <code>localhost:3000</code>.</p>
+          </div>
+          <div class="glass-card info-card">
+            <div class="info-icon">02</div>
+            <h3>Express Routing</h3>
+            <p>Express matches the incoming URL path against registered route handlers in <code>server.js</code> before falling back to static assets or 404 middleware.</p>
+          </div>
+          <div class="glass-card info-card">
+            <div class="info-icon">03</div>
+            <h3>JSON Serialization</h3>
+            <p><code>res.status(200).json()</code> serializes JavaScript objects into valid JSON with proper <code>Content-Type</code> headers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <strong>NEXORA API</strong> • Built by <span>Mian Intkhab (Khabii)</span>
+      </div>
+      <div class="footer-meta">
+        Webora Tec Internship — Week 4 Task 1 • Node.js &amp; Express.js
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
